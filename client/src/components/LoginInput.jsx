@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { fadeInOut } from '../animations';
 
 const LoginInput = ({ placeholder, icon, inputState, inputStateFunc, type, isSignup }) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -8,7 +10,9 @@ const LoginInput = ({ placeholder, icon, inputState, inputStateFunc, type, isSig
   };
 
   return (
-    <div
+   <motion.div 
+   {...fadeInOut}
+   
       className={`flex items-center justify-center gap-4 bg-lightOverlay backdrop-blur-md rounded-md w-full px-4 py-2 ${
         isFocus ? "shadow-md shadow-red-400" : "shadow-none"
       }`}
@@ -23,7 +27,7 @@ const LoginInput = ({ placeholder, icon, inputState, inputStateFunc, type, isSig
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
       />
-    </div>
+    </motion.div>
   );
 };
 
