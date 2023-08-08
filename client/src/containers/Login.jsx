@@ -5,7 +5,7 @@ import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { buttonClick } from '../animations';
 import { FcGoogle } from 'react-icons/fc';
-import {getAuth, signInWithRedirect,  GoogleAuthProvider} from "firebase/auth";
+import {getAuth, signInWithPopup,  GoogleAuthProvider} from "firebase/auth";
 import {app} from "../config/firebase.config"
 
 const Login = () => {
@@ -18,10 +18,12 @@ const Login = () => {
   const provider = new GoogleAuthProvider(); 
   const loginWithGoogle = async() =>{
 
-   await signInWithRedirect(firebaseAuth,provider).then(userCred =>{
+   await signInWithPopup(firebaseAuth,provider).then(userCred =>{
     firebaseAuth.onAuthStateChanged(cred => {
       if(cred) {
-
+                  cred.getIdToken().then(token =>{
+                    console.log(token);
+                  })
       }
     })
    })
